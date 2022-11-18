@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+using namespace std;
+//Circular Queue using Array
+class Queue
+{
+private:
+    int size;
+    int front;
+    int rear;
+    int *Q;
+public:
+    Queue(){front=rear=0;size=10;Q=new int[size];}
+    Queue(int size){front=rear=0;this->size=size;Q=new int[this->size];}
+    void enqueue(int x);
+    int dequeue();
+    void Display();
+    int first();
+    int last();
+    int isEmpty();
+    int isFull();
+};
+void Queue::enqueue(int x)
+{
+    if((rear+1)%size==front)
+        cout<<" Queue is full ";
+    else{
+        rear=(rear+1)%size;
+        Q[rear]=x;
+    }
+}
+int Queue::dequeue()
+{   int x=-1;
+    if(front==rear)
+        cout<<" Queue is empty ";
+    else{
+        front=(front+1)%size;
+        Q[front]=x;
+    }
+    return x;
+}
+void Queue::Display()
+{int i=front +1;
+   do
+   {
+        cout<<Q[i]<<" ";
+        i=(i+1)%size;
+   } while (i!=(rear+1)%size);
+}
+int Queue::first()
+{
+    return Q[front + 1];
+}
+int Queue::last()
+{
+    return Q[rear];
+}
+int Queue::isEmpty()
+{
+    return front==rear?1:0;
+}
+int Queue::isFull()
+{
+    return rear==size-1?1:0;
+}
+int main()
+{   
+    Queue q(5);
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    // q.enqueue(50);
+    q.dequeue();
+   
+    cout<<endl;
+    // cout<<q.isFull();
+    q.Display();
+
+   return 0 ;
+}
