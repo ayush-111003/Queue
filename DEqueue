@@ -1,0 +1,98 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node
+{
+
+    int data;
+    struct node *next;
+
+} *front=NULL,*rear=NULL;
+
+void push_back(int x)//inserting elements from last
+{
+    node *t = new node;
+    
+    if(t==NULL)
+        cout<<" Queue is full ";
+    else
+    {   t->data=x;
+        t->next=NULL;
+        if(front==NULL)
+            front =rear=t;
+        else{
+            rear->next=t;
+            rear=t;
+        }
+    }
+}void push_front(int x)//inserting elements from first
+{
+    node *t = new node;
+    
+    if(t==NULL)
+        cout<<" Queue is full ";
+    else
+    {   t->data=x;
+        if(front==NULL)
+            front =rear=t;
+        else{
+            t->next=front;
+            front=t;
+        }
+    }
+}
+int pop_front()//removing elements from first
+{
+    int x=-1;
+    // node *t = new node;
+    node *p;
+    if(front==NULL&&rear==NULL)cout<<" Queue is empty ";
+    else{
+        p=front;
+        front=front->next;
+        x=p->data;
+        delete(p);
+    }
+    return x;
+}
+int pop_back()//removing elements from last
+{
+    int x=-1;
+    // node *t = new node;
+    node *p;node*q;q=NULL;
+    p=front;
+    if(front==NULL&&rear==NULL)cout<<" Queue is empty ";
+    else{
+        while (p)
+        {
+            q=p;
+            p=p->next;
+        }
+        x=rear->data;
+        rear=q;
+        delete(p);
+    }
+    return x;
+}
+void Display()
+{
+    node*p;
+    p=front;
+    while (p)
+    {
+        cout<<p->data<<" ";
+        p=p->next;
+    }
+    
+}
+int main()
+{   push_front(10);
+    push_front(20);
+    push_front(30);
+    push_back(40);
+    // enqueue_first(50);
+    cout<<pop_back();
+    // Display();
+    // dequeue();
+    Display();
+   return 0 ;
+}
